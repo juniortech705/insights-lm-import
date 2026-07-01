@@ -202,6 +202,15 @@ const ChatArea = ({
                     </div> : <MarkdownRenderer content={notebook?.description || 'No description available for this notebook.'} className="prose prose-gray max-w-none text-gray-700 leading-relaxed" />}
                 </div>
 
+                {/* Akili Welcome Message */}
+                {messages.length === 0 && !pendingUserMessage && !showAiLoading && !isChatDisabled && (
+                  <div className="mb-6 flex justify-start">
+                    <div className="w-full">
+                      <p className="text-gray-700 text-base">Hello! I am Akili, how can I help you?</p>
+                    </div>
+                  </div>
+                )}
+
                 {/* Chat Messages */}
                 {(messages.length > 0 || pendingUserMessage || showAiLoading) && <div className="mb-6 space-y-4">
                     {messages.map((msg, index) => <div key={msg.id} className={`flex ${isUserMessage(msg) ? 'justify-end' : 'justify-start'}`}>
@@ -305,7 +314,7 @@ const ChatArea = ({
       
       {/* Footer */}
       <div className="p-4 border-t border-gray-200 flex-shrink-0">
-        <p className="text-center text-sm text-gray-500">InsightsLM can be inaccurate; please double-check its responses.</p>
+        <p className="text-center text-sm text-gray-500">AkiliLM can be inaccurate; please double-check its responses.</p>
       </div>
       
       {/* Add Sources Dialog */}
