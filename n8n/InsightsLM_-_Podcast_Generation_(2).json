@@ -13,7 +13,7 @@
           "conditions": [
             {
               "id": "05ef5c0e-fe71-4367-a88d-6ba65b8e4e48",
-              "leftValue": "={{ $json.stdout }}",
+              "leftValue": "={{ $json.ffmpeg_status }}",
               "rightValue": "=FFmpeg is installed",
               "operator": {
                 "type": "string",
@@ -460,7 +460,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const { execSync } = require('child_process');\n\nconst responseId = $('Webhook').item.json.body.response_id;\n\nconst inputFile = `/tmp/${responseId}-in.pcm`;\nconst outputFile = `/tmp/${responseId}-out.mp3`;\n\nconst command = `ffmpeg -f s16le -ar 24000 -ac 1 -i ${inputFile} -codec:a libmp3lame -qscale:a 2 ${outputFile}`;\n\ntry {\n  execSync(command);\n  return [{ json: { success: true, outputFile: outputFile } }];\n} catch (error) {\n  return [{ json: { success: false, error: error.message } }];\n}"
+        "jsCode": "const { execSync } = require('child_process');\n\nconst responseId = $('Generate Audio').item.json.responseId;\n\nconst inputFile = `/tmp/${responseId}-in.pcm`;\nconst outputFile = `/tmp/${responseId}-out.mp3`;\n\nconst command = `ffmpeg -f s16le -ar 24000 -ac 1 -i ${inputFile} -codec:a libmp3lame -qscale:a 2 ${outputFile}`;\n\ntry {\n  execSync(command);\n  return [{ json: { success: true, outputFile: outputFile } }];\n} catch (error) {\n  return [{ json: { success: false, error: error.message } }];\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
