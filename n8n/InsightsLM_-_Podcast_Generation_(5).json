@@ -274,7 +274,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/audio/{{ $('Webhook').item.json.body.notebook_id}}/{{ $binary.data.fileName }}",
+        "url": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/object/audio/{{ $('Webhook').item.json.body.notebook_id}}/{{ $binary.data.fileName }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -314,7 +314,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/sign/{{ $json.body.Key }}",
+        "url": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/object/sign/{{ $json.body.Key }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -367,7 +367,7 @@
           "fieldValues": [
             {
               "fieldId": "audio_overview_url",
-              "fieldValue": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/{{ $json.signedURL }}"
+              "fieldValue": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/{{ $json.signedURL }}"
             },
             {
               "fieldId": "audio_url_expires_at",
