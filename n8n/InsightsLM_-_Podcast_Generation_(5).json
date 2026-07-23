@@ -1,0 +1,606 @@
+{
+  "name": "InsightsLM - Podcast Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "05ef5c0e-fe71-4367-a88d-6ba65b8e4e48",
+              "leftValue": "={{ $json.ffmpeg_status }}",
+              "rightValue": "=FFmpeg is installed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3e8219ed-4cfb-4706-b6c0-6cdf4e1d1c3b",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        544,
+        1584
+      ],
+      "id": "7ffca1ba-0c3a-4bf1-9566-b6c036b16ea9",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n    \"message\": \"Workflow was started\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        864,
+        1456
+      ],
+      "id": "20251300-67ae-4f81-9934-7bdf241596b0",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"error\": \"FFmpeg not installed\",\n  \"code\": \"FFMPEG_NOT_INSTALLED\",\n  \"details\": \"The server requires ffmpeg to be installed\"\n}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        864,
+        1648
+      ],
+      "id": "07bde248-7186-4cef-b6ce-0273b5850ed4",
+      "name": "Respond with 500 Error"
+    },
+    {
+      "parameters": {
+        "content": "## To Do \n- REQUIREMENT: FFMPEG needs to be installed on your server for this workflow to succeed\n- Configure the Supabase nodes to reference your Project\n- Configure your Google Cloud API credentials\n- Update the Host of the \"HTTP Requests\" to hit your project",
+        "width": 680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2800,
+        1104
+      ],
+      "id": "837b20af-23d8-4483-89bb-ddc37d2ba809",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "4c4699bc-004b-4ca3-8923-373ddd4a274e",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        64,
+        1584
+      ],
+      "id": "bcd6365c-b3a6-4a4c-8fd9-6db250432f94",
+      "name": "Webhook",
+      "webhookId": "4c4699bc-004b-4ca3-8923-373ddd4a274e",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "4U9UGZuVEypFTw95",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "sources",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "notebook_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Webhook').item.json.body.notebook_id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        1456
+      ],
+      "id": "07010130-8802-4157-a6c2-c57149e92d08",
+      "name": "Get Sources",
+      "credentials": {
+        "supabaseApi": {
+          "id": "DhF92cYeebQuC8JI",
+          "name": "Supabase account local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "include": "specifiedFields",
+        "fieldsToInclude": "title,content",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        1344,
+        1456
+      ],
+      "id": "5b2426bc-6e10-4c7a-ad8e-6b172e476f63",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c3743cbc-c838-401a-8f65-95a386707ded",
+              "name": "prompt",
+              "value": "=I'll give you the text of SOURCE(S) and I'd like you to use the instructions below to write a podcast script\n\n# EXAMPLE OUTPUT STRUCTURE & TRANSCRIPT\n\nPlease read aloud the following in a podcast interview style:\nSpeaker 1: When you watch a Formula One car flash by, it's just an incredible sight. \nSpeaker 2: These things are absolute apex predators of engineering, aren't they? Machines designed purely for speed, pushing everything, materials, aero to the absolute limit. Every single part feels like a technological marvel. It really does.\nSpeaker 1: And what's amazing is that these cars, they weren't just dreamt up in a vacuum. You know, they actually exist within this incredibly tight box, a really, really detailed rulebook that dictates pretty much everything that is and isn't possible.\nSpeaker 2: Exactly. And for this deep dive, we're going straight to the source of that box. Our material today is key sections from the official 2025 Formula One technical regulations put out by the sports governing body, the FIA. Yeah. And our mission here for you listening is really to kind of pull back the curtain on that rulebook. We want to unpack these regulations, try and understand the fundamental principles, maybe some of the surprising details, and just grasp how much complexity is actually baked into the blueprint of an F1 car. It's not just, you know, dry rules. It's the framework that shapes performance, safety and that constant, fascinating battle of innovation we see season after season.\nSpeaker 1: OK, so let's start right at the top then. Yeah. The regulations make it pretty clear who's running the show. It's the FIA, right? They own and organize the Formula One World Championship. They're the ones handing out those coveted titles for drivers, constructors.\nSpeaker 2: That's right. And beneath that sort of top level, there are layers upon layers of rules governing absolutely everything. The championship itself, every single competition within it. So each race weekend, they're governed by the International Sporting Code. These technical regulations we're looking at today, the sporting regulations which cover race procedures, penalties, that kind of thing.\n\n# INSTRUCTIONS TO FOLLOW\n\n1. Opening:\n– Begin with some interesting opening remarks on the topic between the hosts\n– Then introduce the topic as a “deep dive” into the subject matter.\n\n2. Dialog Structure:\n– Use two hosts who engage in a conversational back-and-forth.\n– Alternate between short, punchy statements and longer explanations.\n– Use frequent affirmations like “Right,” “Exactly,” and “Absolutely” to maintain flow and agreement.\n\n3. Language and Tone:\n– Keep the language informal and accessible. Use contractions and colloquialisms.\n– Maintain an enthusiastic, energetic tone throughout.\n– Use rhetorical questions to transition between points: “It's fascinating, isn't it?”\n– Employ phrases like “You know” and “I mean” to maintain a casual feel.\n\n4. Content Presentation:\n– Introduce source material (e.g., articles, studies) early in the discussion.\n– Use analogies to explain complex concepts: “It's like…”\n– Break down ideas into digestible chunks, often using numbered points or clear transitions.\n\n5. Interaction Between Hosts:\n– Have one host pose questions or express confusion, allowing the other to explain.\n– Use phrases like “You've hit the nail on the head” to validate each other's points.\n– Build on each other's ideas, creating a collaborative feel.\n\n6. Engagement Techniques:\n– Address the audience directly at times: “So to everyone listening…”\n– Pose thought-provoking questions for the audience to consider.\n\n7. Structure and Pacing:\n– Start with a broad introduction of the topic and narrow down to specific points.\n– Use phrases like “So we've established…” to summarize and move to new points.\n– Maintain a brisk pace, but allow for moments of reflection on bigger ideas.\n\n8. Concluding the Episode:\n– Signal the wrap-up with “So as we wrap things up…”\n– Pose a final thought-provoking question or takeaway.\n– Use the phrase “And on that note…” to transition to the closing.\n– Encourage continued engagement: “stay curious, keep those questions coming.”\n– End with a consistent sign-off: “Until next time, keep [relevant verb].”\n\n9. Overall Flow:\n– Begin with the misconception or general understanding of the topic.\n– Introduce expert sources that challenge or deepen this understanding.\n– Discuss implications and broader context of the new information.\n– Conclude with how this knowledge affects the listener or the field at large.\n\nRemember to maintain a balance between informative content and engaging conversation, always keeping the tone friendly and accessible regardless of the complexity of the topic.\n\n# SOURCE(S) TO CREATE TRANSCRIPT FROM\n\n{{ JSON.stringify($json.data) }}\n\n# OTHER\n\nIMPORTANT: Only output the transcript and use \\n in between speakers dialog\nIMPORTANT: Your response must start with ...\n\"Please read aloud the following in a podcast interview style:\nSpeaker 1: \"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1600,
+        1456
+      ],
+      "id": "47fc8c03-df4b-4fec-b69d-e34d854a6b8e",
+      "name": "Set Prompt"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.prompt }}",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        1856,
+        1440
+      ],
+      "id": "9d5880a5-732c-4f0f-b158-f9c45000ec12",
+      "name": "Basic LLM Chain",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1856,
+        1664
+      ],
+      "id": "ccadd19c-7ea2-4359-b17f-9a9606fc7834",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "ku70tgxt3y7Z5GbZ",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [{\n    \"parts\":[{\n      \"text\": {{ JSON.stringify($json.text) }}\n    }]\n  }],\n  \"generationConfig\": {\n    \"responseModalities\": [\"AUDIO\"],\n    \"speechConfig\": {\n      \"multiSpeakerVoiceConfig\": {\n        \"speakerVoiceConfigs\": [{\n            \"speaker\": \"Joe\",\n            \"voiceConfig\": {\n              \"prebuiltVoiceConfig\": {\n                \"voiceName\": \"Algenib\"\n              }\n            }\n          }, {\n            \"speaker\": \"Jane\",\n            \"voiceConfig\": {\n              \"prebuiltVoiceConfig\": {\n                \"voiceName\": \"Kore\"\n              }\n            }\n          }]\n      }\n    }\n  },\n  \"model\": \"gemini-2.5-flash-preview-tts\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2272,
+        1440
+      ],
+      "id": "7194082a-d14d-4b3a-9448-ab3e295dcb17",
+      "name": "Generate Audio",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "maxTries": 5,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "MRgJUlv3KrM8Z1xC",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const { execSync } = require('child_process');\nconst fs = require('fs');\nconst os = require('os');\nconst path = require('path');\n\n// Read base64 PCM audio directly from the Gemini API JSON response\n// (NOT from n8n's binary store, which is empty when binaryMode is \"separate\")\nconst base64Data = $('Generate Audio').item.json.candidates[0].content.parts[0].inlineData.data;\n\nif (!base64Data) {\n  throw new Error('No audio data received from Gemini TTS API');\n}\n\nconst pcmBuffer = Buffer.from(base64Data, 'base64');\n\n// Use the OS temp directory for intermediate files\nconst tmpDir = os.tmpdir();\nconst fileId = Date.now() + '-' + Math.random().toString(36).substring(7);\nconst inputFile = path.join(tmpDir, `${fileId}-in.pcm`);\nconst outputFile = path.join(tmpDir, `${fileId}-out.mp3`);\n\ntry {\n  // 1. Write the PCM buffer to a temp file\n  fs.writeFileSync(inputFile, pcmBuffer);\n\n  // 2. Convert PCM to MP3 using FFmpeg with temp files (not pipes)\n  //    -y overwrites output without prompting\n  const command = `ffmpeg -y -f s16le -ar 24000 -ac 1 -i \"${inputFile}\" -codec:a libmp3lame -qscale:a 2 \"${outputFile}\"`;\n  execSync(command, { stdio: 'pipe' });\n\n  // 3. Read the resulting MP3 file\n  const mp3Buffer = fs.readFileSync(outputFile);\n  const mp3Base64 = mp3Buffer.toString('base64');\n\n  // 4. Return the MP3 as binary data for the Upload node\n  return [{\n    json: { success: true, fileName: 'audio.mp3' },\n    binary: {\n      data: {\n        data: mp3Base64,\n        mimeType: 'audio/mpeg',\n        fileName: 'audio.mp3'\n      }\n    }\n  }];\n} catch (error) {\n  throw new Error('FFmpeg conversion failed: ' + error.message);\n} finally {\n  // 5. Clean up temp files\n  try { fs.unlinkSync(inputFile); } catch (e) {}\n  try { fs.unlinkSync(outputFile); } catch (e) {}\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2496,
+        1440
+      ],
+      "id": "5a64d40b-34a1-4c62-b0f4-95707011383c",
+      "name": "Convert Audio (FFmpeg)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/audio/{{ $('Webhook').item.json.body.notebook_id}}/{{ $binary.data.fileName }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "id": "718b0c13-819b-4cdd-b073-05e217d72844",
+      "name": "Upload object",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        2720,
+        1440
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "DhF92cYeebQuC8JI",
+          "name": "Supabase account local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/sign/{{ $json.body.Key }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"expiresIn\": 86400\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2944,
+        1440
+      ],
+      "id": "cf6cac6e-7d1b-4a0b-b727-1c6f29bff877",
+      "name": "Generate Signed URL",
+      "credentials": {
+        "supabaseApi": {
+          "id": "DhF92cYeebQuC8JI",
+          "name": "Supabase account local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  const now = new Date();\n  const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Add 1 day in ms\n  item.json.timestamp = tomorrow.toISOString(); // Compatible with Supabase timestampz\n}\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3184,
+        1440
+      ],
+      "id": "c880e97b-1769-4227-8a9d-7451e82277b8",
+      "name": "Generate Timestamp for Expires"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "notebooks",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Webhook').item.json.body.notebook_id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "audio_overview_url",
+              "fieldValue": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/{{ $json.signedURL }}"
+            },
+            {
+              "fieldId": "audio_url_expires_at",
+              "fieldValue": "={{ $json.timestamp }}"
+            },
+            {
+              "fieldId": "audio_overview_generation_status",
+              "fieldValue": "completed"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3440,
+        1440
+      ],
+      "id": "8b916ea6-fb08-4f95-9d7d-5fb733dda00d",
+      "name": "Supabase",
+      "credentials": {
+        "supabaseApi": {
+          "id": "DhF92cYeebQuC8JI",
+          "name": "Supabase account local"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "[![The AI Automators](https://www.theaiautomators.com/wp-content/uploads/2025/03/gray-logo.png)](https://www.theaiautomators.com/)\n## InsightsLM\nhttps://github.com/theaiautomators/insights-lm-public",
+        "height": 220,
+        "width": 280,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        1168
+      ],
+      "id": "a2531c66-0032-4c35-afc1-6e9983c6acad",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "jsCode": "const { execSync } = require('child_process');\n\ntry {\n  execSync('ffmpeg -version');\n  return [{ json: { ffmpeg_status: \"FFmpeg is installed\" } }];\n} catch (error) {\n  return [{ json: { ffmpeg_status: \"FFmpeg is NOT installed\" } }];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        1600
+      ],
+      "id": "fb96553a-20be-41fe-bd28-69f4640c905d",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond with 500 Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Sources": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Set Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Prompt": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Generate Audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Audio": {
+      "main": [
+        [
+          {
+            "node": "Convert Audio (FFmpeg)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Audio (FFmpeg)": {
+      "main": [
+        [
+          {
+            "node": "Upload object",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload object": {
+      "main": [
+        [
+          {
+            "node": "Generate Signed URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Signed URL": {
+      "main": [
+        [
+          {
+            "node": "Generate Timestamp for Expires",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Timestamp for Expires": {
+      "main": [
+        [
+          {
+            "node": "Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "9ead3a02-ae6c-4919-a717-6c9b9a7b1fe1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "480925e0bd2712cd9edbe913f39946208974039835e282066d641e973a7bf41b"
+  },
+  "nodeGroups": [],
+  "id": "So49i2qxqATYmeyn",
+  "tags": []
+}
