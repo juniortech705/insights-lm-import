@@ -170,7 +170,7 @@
             {
               "id": "c3743cbc-c838-401a-8f65-95a386707ded",
               "name": "prompt",
-              "value": "=I’ll give you the text of SOURCE(S) and I’d like you to use the instructions below to write a podcast script\n\n# EXAMPLE OUTPUT STRUCTURE & TRANSCRIPT\n\nPlease read aloud the following in a podcast interview style:\nSpeaker 1: When you watch a Formula One car flash by, it's just an incredible sight. \nSpeaker 2: These things are absolute apex predators of engineering, aren't they? Machines designed purely for speed, pushing everything, materials, aero to the absolute limit. Every single part feels like a technological marvel. It really does.\nSpeaker 1: And what's amazing is that these cars, they weren't just dreamt up in a vacuum. You know, they actually exist within this incredibly tight box, a really, really detailed rulebook that dictates pretty much everything that is and isn't possible.\nSpeaker 2: Exactly. And for this deep dive, we're going straight to the source of that box. Our material today is key sections from the official 2025 Formula One technical regulations put out by the sports governing body, the FIA. Yeah. And our mission here for you listening is really to kind of pull back the curtain on that rulebook. We want to unpack these regulations, try and understand the fundamental principles, maybe some of the surprising details, and just grasp how much complexity is actually baked into the blueprint of an F1 car. It's not just, you know, dry rules. It's the framework that shapes performance, safety and that constant, fascinating battle of innovation we see season after season.\nSpeaker 1: OK, so let's start right at the top then. Yeah. The regulations make it pretty clear who's running the show. It's the FIA, right? They own and organize the Formula One World Championship. They're the ones handing out those coveted titles for drivers, constructors.\nSpeaker 2: That's right. And beneath that sort of top level, there are layers upon layers of rules governing absolutely everything. The championship itself, every single competition within it. So each race weekend, they're governed by the International Sporting Code. These technical regulations we're looking at today, the sporting regulations which cover race procedures, penalties, that kind of thing.\n\n# INSTRUCTIONS TO FOLLOW\n\n1. Opening:\n– Begin with some interesting opening remarks on the topic between the hosts\n– Then introduce the topic as a “deep dive” into the subject matter.\n\n2. Dialog Structure:\n– Use two hosts who engage in a conversational back-and-forth.\n– Alternate between short, punchy statements and longer explanations.\n– Use frequent affirmations like “Right,” “Exactly,” and “Absolutely” to maintain flow and agreement.\n\n3. Language and Tone:\n– Keep the language informal and accessible. Use contractions and colloquialisms.\n– Maintain an enthusiastic, energetic tone throughout.\n– Use rhetorical questions to transition between points: “It’s fascinating, isn’t it?”\n– Employ phrases like “You know” and “I mean” to maintain a casual feel.\n\n4. Content Presentation:\n– Introduce source material (e.g., articles, studies) early in the discussion.\n– Use analogies to explain complex concepts: “It’s like…”\n– Break down ideas into digestible chunks, often using numbered points or clear transitions.\n\n5. Interaction Between Hosts:\n– Have one host pose questions or express confusion, allowing the other to explain.\n– Use phrases like “You’ve hit the nail on the head” to validate each other’s points.\n– Build on each other’s ideas, creating a collaborative feel.\n\n6. Engagement Techniques:\n– Address the audience directly at times: “So to everyone listening…”\n– Pose thought-provoking questions for the audience to consider.\n\n7. Structure and Pacing:\n– Start with a broad introduction of the topic and narrow down to specific points.\n– Use phrases like “So we’ve established…” to summarize and move to new points.\n– Maintain a brisk pace, but allow for moments of reflection on bigger ideas.\n\n8. Concluding the Episode:\n– Signal the wrap-up with “So as we wrap things up…”\n– Pose a final thought-provoking question or takeaway.\n– Use the phrase “And on that note…” to transition to the closing.\n– Encourage continued engagement: “stay curious, keep those questions coming.”\n– End with a consistent sign-off: “Until next time, keep [relevant verb].”\n\n9. Overall Flow:\n– Begin with the misconception or general understanding of the topic.\n– Introduce expert sources that challenge or deepen this understanding.\n– Discuss implications and broader context of the new information.\n– Conclude with how this knowledge affects the listener or the field at large.\n\nRemember to maintain a balance between informative content and engaging conversation, always keeping the tone friendly and accessible regardless of the complexity of the topic.\n\n# SOURCE(S) TO CREATE TRANSCRIPT FROM\n\n{{ JSON.stringify($json.data) }}\n\n# OTHER\n\nIMPORTANT: Only output the transcript and use \\n in between speakers dialog\nIMPORTANT: Your response must start with ...\n\"Please read aloud the following in a podcast interview style:\nSpeaker 1: \"",
+              "value": "=I'll give you the text of SOURCE(S) and I'd like you to use the instructions below to write a podcast script\n\n# EXAMPLE OUTPUT STRUCTURE & TRANSCRIPT\n\nPlease read aloud the following in a podcast interview style:\nSpeaker 1: When you watch a Formula One car flash by, it's just an incredible sight. \nSpeaker 2: These things are absolute apex predators of engineering, aren't they? Machines designed purely for speed, pushing everything, materials, aero to the absolute limit. Every single part feels like a technological marvel. It really does.\nSpeaker 1: And what's amazing is that these cars, they weren't just dreamt up in a vacuum. You know, they actually exist within this incredibly tight box, a really, really detailed rulebook that dictates pretty much everything that is and isn't possible.\nSpeaker 2: Exactly. And for this deep dive, we're going straight to the source of that box. Our material today is key sections from the official 2025 Formula One technical regulations put out by the sports governing body, the FIA. Yeah. And our mission here for you listening is really to kind of pull back the curtain on that rulebook. We want to unpack these regulations, try and understand the fundamental principles, maybe some of the surprising details, and just grasp how much complexity is actually baked into the blueprint of an F1 car. It's not just, you know, dry rules. It's the framework that shapes performance, safety and that constant, fascinating battle of innovation we see season after season.\nSpeaker 1: OK, so let's start right at the top then. Yeah. The regulations make it pretty clear who's running the show. It's the FIA, right? They own and organize the Formula One World Championship. They're the ones handing out those coveted titles for drivers, constructors.\nSpeaker 2: That's right. And beneath that sort of top level, there are layers upon layers of rules governing absolutely everything. The championship itself, every single competition within it. So each race weekend, they're governed by the International Sporting Code. These technical regulations we're looking at today, the sporting regulations which cover race procedures, penalties, that kind of thing.\n\n# INSTRUCTIONS TO FOLLOW\n\n1. Opening:\n– Begin with some interesting opening remarks on the topic between the hosts\n– Then introduce the topic as a “deep dive” into the subject matter.\n\n2. Dialog Structure:\n– Use two hosts who engage in a conversational back-and-forth.\n– Alternate between short, punchy statements and longer explanations.\n– Use frequent affirmations like “Right,” “Exactly,” and “Absolutely” to maintain flow and agreement.\n\n3. Language and Tone:\n– Keep the language informal and accessible. Use contractions and colloquialisms.\n– Maintain an enthusiastic, energetic tone throughout.\n– Use rhetorical questions to transition between points: “It's fascinating, isn't it?”\n– Employ phrases like “You know” and “I mean” to maintain a casual feel.\n\n4. Content Presentation:\n– Introduce source material (e.g., articles, studies) early in the discussion.\n– Use analogies to explain complex concepts: “It's like…”\n– Break down ideas into digestible chunks, often using numbered points or clear transitions.\n\n5. Interaction Between Hosts:\n– Have one host pose questions or express confusion, allowing the other to explain.\n– Use phrases like “You've hit the nail on the head” to validate each other's points.\n– Build on each other's ideas, creating a collaborative feel.\n\n6. Engagement Techniques:\n– Address the audience directly at times: “So to everyone listening…”\n– Pose thought-provoking questions for the audience to consider.\n\n7. Structure and Pacing:\n– Start with a broad introduction of the topic and narrow down to specific points.\n– Use phrases like “So we've established…” to summarize and move to new points.\n– Maintain a brisk pace, but allow for moments of reflection on bigger ideas.\n\n8. Concluding the Episode:\n– Signal the wrap-up with “So as we wrap things up…”\n– Pose a final thought-provoking question or takeaway.\n– Use the phrase “And on that note…” to transition to the closing.\n– Encourage continued engagement: “stay curious, keep those questions coming.”\n– End with a consistent sign-off: “Until next time, keep [relevant verb].”\n\n9. Overall Flow:\n– Begin with the misconception or general understanding of the topic.\n– Introduce expert sources that challenge or deepen this understanding.\n– Discuss implications and broader context of the new information.\n– Conclude with how this knowledge affects the listener or the field at large.\n\nRemember to maintain a balance between informative content and engaging conversation, always keeping the tone friendly and accessible regardless of the complexity of the topic.\n\n# SOURCE(S) TO CREATE TRANSCRIPT FROM\n\n{{ JSON.stringify($json.data) }}\n\n# OTHER\n\nIMPORTANT: Only output the transcript and use \\n in between speakers dialog\nIMPORTANT: Your response must start with ...\n\"Please read aloud the following in a podcast interview style:\nSpeaker 1: \"",
               "type": "string"
             }
           ]
@@ -260,55 +260,21 @@
     },
     {
       "parameters": {
-        "operation": "toBinary",
-        "sourceProperty": "candidates[0].content.parts[0].inlineData.data",
-        "options": {
-          "fileName": "audio.pcm",
-          "mimeType": "audio/L16"
-        }
+        "jsCode": "const { spawnSync } = require('child_process');\n\n// Get base64 PCM audio data from the Gemini TTS response\nconst base64Data = $('Generate Audio').item.json.candidates[0].content.parts[0].inlineData.data;\nconst pcmBuffer = Buffer.from(base64Data, 'base64');\n\n// Convert PCM to MP3 using FFmpeg via stdin/stdout pipes (no disk files needed)\nconst result = spawnSync('ffmpeg', [\n  '-f', 's16le',\n  '-ar', '24000',\n  '-ac', '1',\n  '-i', 'pipe:0',\n  '-codec:a', 'libmp3lame',\n  '-qscale:a', '2',\n  'pipe:1'\n], {\n  input: pcmBuffer,\n  maxBuffer: 200 * 1024 * 1024\n});\n\nif (result.status !== 0) {\n  const errMsg = result.stderr ? result.stderr.toString() : 'Unknown FFmpeg error';\n  throw new Error('FFmpeg conversion failed: ' + errMsg);\n}\n\n// Return the MP3 as binary data (key 'data' matches the Upload node's inputDataFieldName)\nreturn [{\n  json: { success: true, fileName: 'audio.mp3' },\n  binary: {\n    data: {\n      data: result.stdout.toString('base64'),\n      mimeType: 'audio/mpeg',\n      fileName: 'audio.mp3'\n    }\n  }\n}];"
       },
-      "type": "n8n-nodes-base.convertToFile",
-      "typeVersion": 1.1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
         1744,
         1184
       ],
       "id": "0c297369-7ff9-45f8-be19-83191b69a676",
-      "name": "Convert to File"
-    },
-    {
-      "parameters": {
-        "operation": "write",
-        "fileName": "=/tmp/{{ $('Generate Audio').item.json.responseId }}-in.pcm",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.readWriteFile",
-      "typeVersion": 1,
-      "position": [
-        1968,
-        1184
-      ],
-      "id": "d6a89506-9cd2-4486-85a1-be20060d5d04",
-      "name": "Read/Write Files from Disk"
-    },
-    {
-      "parameters": {
-        "fileSelector": "=/tmp/{{ $('Generate Audio').item.json.responseId }}-out.mp3",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.readWriteFile",
-      "typeVersion": 1,
-      "position": [
-        2432,
-        1184
-      ],
-      "id": "5d91d055-300e-4a33-b3e9-fac3b25dd3e0",
-      "name": "Read/Write Files from Disk1"
+      "name": "Convert Audio (FFmpeg Pipe)"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/object/audio/{{ $('Webhook').item.json.body.notebook_id}}/{{ $binary.data.fileName }}",
+        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/audio/{{ $('Webhook').item.json.body.notebook_id}}/{{ $binary.data.fileName }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -335,7 +301,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        2640,
+        1968,
         1184
       ],
       "credentials": {
@@ -348,7 +314,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/object/sign/{{ $json.body.Key }}",
+        "url": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/object/sign/{{ $json.body.Key }}",
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "supabaseApi",
         "sendBody": true,
@@ -359,7 +325,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2848,
+        2192,
         1184
       ],
       "id": "f05a5230-c0c5-4b55-b50c-57b1a3c4df83",
@@ -378,7 +344,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3088,
+        2432,
         1184
       ],
       "id": "8d5764b9-498a-4a73-a62a-69ccb6fa5716",
@@ -401,7 +367,7 @@
           "fieldValues": [
             {
               "fieldId": "audio_overview_url",
-              "fieldValue": "=https://bsxuphnrqbonormoqath.supabase.co/storage/v1/{{ $json.signedURL }}"
+              "fieldValue": "=https://swoczcqhkmslwudbpmju.supabase.co/storage/v1/{{ $json.signedURL }}"
             },
             {
               "fieldId": "audio_url_expires_at",
@@ -417,7 +383,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        3344,
+        2688,
         1184
       ],
       "id": "e549327c-f98e-4119-82b0-92c8e902fd06",
@@ -457,19 +423,6 @@
       ],
       "id": "4beb48f6-7b6e-4240-a006-1609d1c4fb55",
       "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "jsCode": "const { execSync } = require('child_process');\n\nconst responseId = $('Generate Audio').item.json.responseId;\n\nconst inputFile = `/tmp/${responseId}-in.pcm`;\nconst outputFile = `/tmp/${responseId}-out.mp3`;\n\nconst command = `ffmpeg -f s16le -ar 24000 -ac 1 -i ${inputFile} -codec:a libmp3lame -qscale:a 2 ${outputFile}`;\n\ntry {\n  execSync(command);\n  return [{ json: { success: true, outputFile: outputFile } }];\n} catch (error) {\n  return [{ json: { success: false, error: error.message } }];\n}"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2192,
-        1200
-      ],
-      "id": "015ce6a5-b8a4-4fdf-9679-cf6e6ac0aa20",
-      "name": "Code in JavaScript1"
     }
   ],
   "pinData": {},
@@ -573,36 +526,14 @@
       "main": [
         [
           {
-            "node": "Convert to File",
+            "node": "Convert Audio (FFmpeg Pipe)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Convert to File": {
-      "main": [
-        [
-          {
-            "node": "Read/Write Files from Disk",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read/Write Files from Disk": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read/Write Files from Disk1": {
+    "Convert Audio (FFmpeg Pipe)": {
       "main": [
         [
           {
@@ -651,17 +582,6 @@
         [
           {
             "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript1": {
-      "main": [
-        [
-          {
-            "node": "Read/Write Files from Disk1",
             "type": "main",
             "index": 0
           }
